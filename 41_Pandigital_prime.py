@@ -1,26 +1,19 @@
-def primes_to(n):
-    primes = [i for i in range(n + 1)]
-    primes[1] = 0
-    for j in range (2, n):
-        if int(primes[j]) != 0:
-            for k in range (j ** 2, len(primes), j):
-                primes[k] = 0
-    primes = list(set(primes))
-    return primes
+from primes_to import primes_to
 
+#vsota stevk 987654321 (in permutacij) je deljiva z 9, torej ne more biti prastevilo
+def is_pandigital(n):
+    list_n = list(str(n))
+    if not('0' in list_n):
+        len_n = len(str(n))
+        max_n = int(max(list_n))
+        return len_n == len(set(str(n))) and len_n == max_n
+    return False
 
-primes = primes_to(10000000)
+primes = primes_to(87654321)
+print('grem po cifrah')
+primes = primes[::-1]
 
-pandigitals = []
-
-for i in primes:
-    s = str(i)
-    l = str(set(s))
-    print(l)
-    if len(s) == len(str(123456789)):
-        pandigitals.append(i * j)
-        j += 1
-
-print(l, pandigitals)
-
-
+for p in primes:
+    if is_pandigital(p):
+        print(p)
+        break
